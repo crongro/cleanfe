@@ -32,22 +32,4 @@ import MyModal from './modal.js.es6';
     });
 
 
-
-
 })();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

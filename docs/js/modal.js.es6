@@ -11,29 +11,30 @@ class  MyModal {
   constructor(options) {
     this.myAsync = new MyAsync();
   }
-  execModal() {
+  async execModal() {
     var el = document.querySelector("#portfolio .row:nth-of-type(2)");
+    el.addEventListener("click", this.clickListener.bind(this));
+  }
 
-    el.addEventListener("click", (evt) => {
-      evt.preventDefault();
+  async clickListener(evt) {
+    evt.preventDefault();
 
-      if(evt.target.nodeName !== "I" && evt.target.querySelector(".fa-plus") === null ) return;
+    if(evt.target.nodeName !== "I" && evt.target.querySelector(".fa-plus") === null ) return;
 
-      var ID = evt.target.closest(".portfolio-link").getAttribute("href");
+    var ID = evt.target.closest(".portfolio-link").getAttribute("href");
 
-      this.myAsync.execAsyncAwait();
+    let sHTML = await this.myAsync.execAsyncAwait(ID.substring(1));
+    document.querySelector("footer").insertAdjacentHTML('afterend', sHTML);
 
-      var elModal = document.querySelector(ID);
-      elModal.classList.add("in");
-      elModal.style.display = "block";
+    var elModal = document.querySelector(ID);
+    elModal.classList.add("in");
+    elModal.style.display = "block";
 
-      var str = "<div class='modal-backdrop fade in'></div>";
-      document.body.insertAdjacentHTML("beforeend", str);
-      document.body.classList.add("modal-open");
+    var str = "<div class='modal-backdrop fade in'></div>";
+    document.body.insertAdjacentHTML("beforeend", str);
+    document.body.classList.add("modal-open");
 
-      elModal.querySelector(".close-modal").addEventListener("click", this.disappearModal.bind(this, elModal));
-    });
-
+    elModal.querySelector(".close-modal").addEventListener("click", this.disappearModal.bind(this, elModal));
   }
 
     disappearModal(elModal, evt) {

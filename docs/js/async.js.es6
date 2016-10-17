@@ -1,4 +1,4 @@
-import listTpl from '../template/example-tpl.hbs';
+import modalTpl from '../template/portfolioModal-tpl.hbs';
 
 class  MyAsync{
   constructor() {
@@ -9,10 +9,8 @@ class  MyAsync{
     return new Promise(function(resolve, reject){
       var req = new XMLHttpRequest();
       req.addEventListener("load", function() {
-        //let htData = JSON.parse(req.responseText);
-        let sData = req.responseText;
-        //if(typeof htData !== "object") reject("wrong data");
-        if(typeof sData !== "string") reject("wrong data");
+        let sData = JSON.parse(req.responseText);
+        if(typeof sData !== "object") reject("wrong data");
         else resolve(sData);
       });
       req.open("GET", url);
@@ -21,14 +19,12 @@ class  MyAsync{
     
   }
 
-  async execAsyncAwait () {
+  async execAsyncAwait (ID) {
     try {
-
-      document.body.innerHTML = listTpl( { greeting: 'Hello World' } );  
-
-      var data = await this.simpleFetch("/docs/template/portfolioModal.tpl");
-      console.log('async result -> \n',   data);
+      let data = await this.simpleFetch("../../data/" +  ID + ".json");
+      let sHTML = modalTpl( data );
       //var data2 = await simpleFetch(url2);
+      return sHTML;
     } catch (err) {
       console.log("error during myGenerator : ", err);
     }
