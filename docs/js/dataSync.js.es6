@@ -1,5 +1,5 @@
-class DataSync {
-  bindModelInput(obj, property, elView, fnCallback) {
+export class DataSync {
+  bindModel(obj, property, elView, fnCallback) {
       Object.defineProperty(obj, property, {
         get: function() {
          return elView.value;
@@ -12,5 +12,3 @@ class DataSync {
     });
   }
 }
-
-export default DataSync;

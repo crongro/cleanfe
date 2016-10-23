@@ -82,7 +82,8 @@ h1, h2, h3, h4, h5, h6 {
 // Custom Navigation Bar
 
 .navbar-custom {
-    background-color: @gray-darker;
+    //background-color: @gray-darker;
+    background-color: #337ab7;
     border-color: transparent;
     .navbar-brand {
         color: @theme-primary;
@@ -144,7 +145,7 @@ h1, h2, h3, h4, h5, h6 {
         transition: padding 0.3s;
         border: none;
         .navbar-brand {
-            font-size: 2em;
+            font-size: 2.3em;
             -webkit-transition: all 0.3s;
             -moz-transition: all 0.3s;
             transition: all 0.3s;
@@ -159,7 +160,8 @@ h1, h2, h3, h4, h5, h6 {
 
 @media(min-width:768px) {
     .navbar-custom.affix {
-        background-color: @gray-darker;
+        //background-color: @gray-darker;
+        background-color: #337ab7;
         padding: 10px 0;
         .navbar-brand {
             font-size: 1.5em;
@@ -256,7 +258,7 @@ section {
 @media(min-width:768px) {
     section {
         //padding: 150px 0;
-        padding: 120px 0 50px 0;
+        padding: 60px 0 50px 0;
     }
 }
 
@@ -575,6 +577,9 @@ section#contact {
     .section-heading {
         color: white;
     }
+   #contactForm > .row > div:nth-of-type(1) {
+        display : none;
+    }
     .form-group {
         margin-bottom: 25px;
         input,
@@ -617,6 +622,9 @@ section#contact {
     }
     .text-danger {
         color: @theme-danger;
+        .word-count {
+            font-size : 24px;
+        }
     }
 }
 
@@ -624,7 +632,7 @@ section#contact {
 
 footer {
     //padding: 25px 0;
-    padding: 40px 0;
+    padding: 100px 0;
     text-align: center;
     .email-area {
         margin-bottom:4px;

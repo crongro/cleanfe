@@ -2,10 +2,10 @@ import modalTpl from '../template/portfolioModal-tpl.hbs';
 
 class  MyAsync{
   constructor() {
-   this.name = "dddd";
+   this.name = "dummy..";
   }
 
-   simpleFetch(url) {
+  simpleFetch(url) {
     return new Promise(function(resolve, reject){
       var req = new XMLHttpRequest();
       req.addEventListener("load", function() {
@@ -16,14 +16,17 @@ class  MyAsync{
       req.open("GET", url);
       req.send();
     });
-    
   }
 
   async execAsyncAwait (ID) {
     try {
       let data = await this.simpleFetch("../../data/" +  ID + ".json");
+      if (data['additional-info']) {
+        let dataAddition = await this.simpleFetch("../../data/addInfo.json");
+        data["additional-desc"] = dataAddition.description;
+      }
+
       let sHTML = modalTpl( data );
-      //var data2 = await simpleFetch(url2);
       return sHTML;
     } catch (err) {
       console.log("error during myGenerator : ", err);
@@ -43,3 +46,6 @@ class  MyAsync{
 }
 
 export default MyAsync;
+
+
+

@@ -1,15 +1,6 @@
-/*
-jquery Free 에 어울리게 몇 가지 delegation을 좀더 쉽게 해주는 메서드들 (Element.closest(), Matches)
-polyfll 이 있다.
-https://plainjs.com/javascript/traversing/get-closest-element-by-selector-39/
-
-*/
-
-import MyAsync from './async.js.es6';
-
 class  MyModal {
-  constructor(options) {
-    this.myAsync = new MyAsync();
+  constructor(dataSyncDepdency, myAsyncDependency) {
+    this.myAsync = myAsyncDependency;
   }
   async execModal() {
     var el = document.querySelector("#portfolio .row:nth-of-type(2)");
@@ -21,7 +12,9 @@ class  MyModal {
 
     if(evt.target.nodeName !== "I" && evt.target.querySelector(".fa-plus") === null ) return;
 
-    var ID = evt.target.closest(".portfolio-link").getAttribute("href");
+    let elPortfolioLink = evt.target.closest(".portfolio-link");
+    if(!elPortfolioLink) return;
+    var ID = elPortfolioLink.getAttribute("href");
 
     let sHTML = await this.myAsync.execAsyncAwait(ID.substring(1));
     document.querySelector("footer").insertAdjacentHTML('afterend', sHTML);
